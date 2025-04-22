@@ -1,4 +1,3 @@
-<!-- Study Destination Selection Page -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,25 +8,38 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
     <style>
       .country-card {
-        transition: transform 0.3s, box-shadow 0.3s;
-        height: 150px;
+        position: relative;
+        width: 70%;
+        height: 160px; /* fixed rectangle */
+        border-radius: 0; /* no rounding */
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
+        background-size: cover; /* flag fills the card */
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: none !important; /* kill any stray skew/rotate */
+
+        /* text style */
+        color: rgba(0, 0, 0, 0.7);  
+        font-size: 1.25rem;
         font-weight: bold;
+
+
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       .country-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <!-- Navigation Bar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <a class="navbar-brand" href="index.html">GSAC</a>
@@ -64,115 +76,114 @@
     <div class="container mt-5">
       <h2 class="text-center mb-4">Choose Your Study Destination</h2>
       <div class="row g-4">
+        <!-- United States -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('United States')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/USA.jpg')"
+            onclick="selectAndGo('United States')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              United States
-            </div>
-          </a>
+            United States
+          </div>
         </div>
+
+        <!-- United Kingdom -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('United Kingdom')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/UK.jpg')"
+            onclick="selectAndGo('United Kingdom')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              United Kingdom
-            </div>
-          </a>
+            United Kingdom
+          </div>
         </div>
+
+        <!-- Canada -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Canada')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/Canada.jpg')"
+            onclick="selectAndGo('Canada')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Canada
-            </div>
-          </a>
+            Canada
+          </div>
         </div>
+
+        <!-- Australia -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Australia')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/Australia.jpg')"
+            onclick="selectAndGo('Australia')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Australia
-            </div>
-          </a>
+            Australia
+          </div>
         </div>
+
+        <!-- Germany -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Germany')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/germany.jpg')"
+            onclick="selectAndGo('Germany')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Germany
-            </div>
-          </a>
+            Germany
+          </div>
         </div>
+
+        <!-- France -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('France')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/france.jpg')"
+            onclick="selectAndGo('France')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              France
-            </div>
-          </a>
+            France
+          </div>
         </div>
+
+        <!-- Singapore -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Singapore')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/singapore.jpg')"
+            onclick="selectAndGo('Singapore')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Singapore
-            </div>
-          </a>
+            Singapore
+          </div>
         </div>
+
+        <!-- Japan -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Japan')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/japan.jpg')"
+            onclick="selectAndGo('Japan')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Japan
-            </div>
-          </a>
+            Japan
+          </div>
         </div>
+
+        <!-- Netherlands -->
         <div class="col-md-4 col-sm-6">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Netherlands')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/netherland.jpg')"
+            onclick="selectAndGo('Netherlands')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Netherlands
-            </div>
-          </a>
+            Netherlands
+          </div>
         </div>
+
+        <!-- Sweden -->
         <div class="col-md-4 col-sm-6 mx-auto">
-          <a
-            href="country_detail.html"
-            class="text-decoration-none"
-            onclick="saveCountry('Sweden')"
+          <div
+            class="country-card"
+            style="background-image: url('/flags/swedan.jpg')"
+            onclick="selectAndGo('Sweden')"
           >
-            <div class="card country-card bg-light text-dark text-center">
-              Sweden
-            </div>
-          </a>
+            Sweden
+          </div>
         </div>
       </div>
     </div>
@@ -182,12 +193,15 @@
       <p>&copy; 2025 Global Students Abroad Council. All Rights Reserved.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      function saveCountry(country) {
+      function selectAndGo(country) {
+        // store for fallback
         localStorage.setItem("selectedCountry", country);
+        // navigate with query param
+        window.location.href =
+          "country_detail.html?country=" + encodeURIComponent(country);
       }
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
