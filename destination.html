@@ -65,12 +65,14 @@
           /* move the bg‐image 10px away from the right edge */
           background-position-x: calc(100% - 10px);
           background-position-y: center;
+          background-size: contain;
         }
       
-        /* optionally make the card a bit wider on mobile */
         .country-card {
-          width: 70%;
-          height:220px;
+          /* let the card size itself by aspect ratio: adjust to your flag’s natural ratio */
+          aspect-ratio: 4/3;    /* e.g. width:height = 4:3 */
+          height: auto;         /* remove fixed height */
+          width: 100%;          /* full width of its column */
           margin: 0 auto;
         }
       }
