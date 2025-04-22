@@ -12,29 +12,52 @@
       .country-card {
         position: relative;
         width: 70%;
-        height: 160px; /* fixed rectangle */
-        border-radius: 0; /* no rounding */
+        height:170px;
         overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: cover; /* flag fills the card */
-        background-position: center;
-        background-repeat: no-repeat;
-        transform: none !important; /* kill any stray skew/rotate */
-
-        /* text style */
-        color: rgba(0, 0, 0, 0.7);  
-        font-size: 1.25rem;
-        font-weight: bold;
-
-
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .country-card:hover {
-        transform: translateY(-5px) !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         cursor: pointer;
+        background: var(--img) center/cover no-repeat;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      /* the "blur layer" */
+      .country-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: inherit; /* pick up the same image */
+        background-size: cover;
+        background-position: center;
+        filter: blur(0) brightness(1);
+        transition: filter 0.3s;
+        z-index: 1;
+      }
+
+      /* the label, initially hidden */
+      .country-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 0.5em 1em;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.3s;
+        z-index: 2;
+      }
+
+      /* hover state */
+      .country-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+      .country-card:hover::before {
+        filter: blur(4px) brightness(0.7);
+      }
+      .country-card:hover .country-label {
+        opacity: 1;
       }
     </style>
   </head>
@@ -80,10 +103,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/USA.jpg')"
+            style="--img: url('/flags/USA.jpg')"
             onclick="selectAndGo('United States')"
           >
-            United States
+            <span class="country-label">United States</span>
           </div>
         </div>
 
@@ -91,10 +114,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/UK.jpg')"
+            style="--img: url('/flags/UK.jpg')"
             onclick="selectAndGo('United Kingdom')"
           >
-            United Kingdom
+            <span class="country-label">United Kingdom</span>
           </div>
         </div>
 
@@ -102,10 +125,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/Canada.jpg')"
+            style="--img: url('/flags/Canada.jpg')"
             onclick="selectAndGo('Canada')"
           >
-            Canada
+            <span class="country-label">Canada</span>
           </div>
         </div>
 
@@ -113,10 +136,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/Australia.jpg')"
+            style="--img: url('/flags/Australia.jpg')"
             onclick="selectAndGo('Australia')"
           >
-            Australia
+            <span class="country-label">Australia</span>
           </div>
         </div>
 
@@ -124,10 +147,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/germany.jpg')"
+            style="--img: url('/flags/germany.jpg')"
             onclick="selectAndGo('Germany')"
           >
-            Germany
+            <span class="country-label">Germany</span>
           </div>
         </div>
 
@@ -135,10 +158,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/france.jpg')"
+            style="--img: url('/flags/france.jpg')"
             onclick="selectAndGo('France')"
           >
-            France
+            <span class="country-label">France</span>
           </div>
         </div>
 
@@ -146,10 +169,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/singapore.jpg')"
+            style="--img: url('/flags/singapore.jpg')"
             onclick="selectAndGo('Singapore')"
           >
-            Singapore
+            <span class="country-label">Singapore</span>
           </div>
         </div>
 
@@ -157,10 +180,10 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/japan.jpg')"
+            style="--img: url('/flags/japan.jpg')"
             onclick="selectAndGo('Japan')"
           >
-            Japan
+            <span class="country-label">Japan</span>
           </div>
         </div>
 
@@ -168,21 +191,21 @@
         <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/netherland.jpg')"
+            style="--img: url('/flags/netherland.jpg')"
             onclick="selectAndGo('Netherlands')"
           >
-            Netherlands
+            <span class="country-label">Netherlands</span>
           </div>
         </div>
 
         <!-- Sweden -->
-        <div class="col-md-4 col-sm-6 mx-auto">
+        <div class="col-md-4 col-sm-6">
           <div
             class="country-card"
-            style="background-image: url('/flags/swedan.jpg')"
+            style="--img: url('/flags/swedan.jpg')"
             onclick="selectAndGo('Sweden')"
           >
-            Sweden
+            <span class="country-label">Sweden</span>
           </div>
         </div>
       </div>
