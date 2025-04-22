@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard | GSAC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">GSAC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
+          <li class="nav-item"><a class="nav-link" href="payment.html">Payments</a></li>
+          <li class="nav-item"><a class="nav-link text-danger" href="index.html">Logout</a></li>
+          <li class="nav-item"><a class="nav-link" href="enroll.html">Enroll</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard Content -->
+  <div class="container mt-5">
+    <h2 class="text-center">Welcome, <span id="user-name">Student</span>!</h2>
+    <p class="text-center">Manage your application and stay updated on your study abroad journey.</p>
+
+    <div class="row">
+      <!-- Profile Section -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <img src="user.png" class="rounded-circle mb-3" width="80" alt="User Profile" />
+            <h5 id="profile-name">Student Name</h5>
+            <p id="profile-email">student@example.com</p>
+            <a href="index.html" class="btn btn-sm btn-outline-primary">Edit Profile</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application Status -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Application Status</h5>
+            <p class="text-warning" id="app-status">Pending</p>
+            <a href="tracking.html" class="btn btn-sm btn-primary">Track Application</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Saved Course -->
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Selected Course</h5>
+            <p id="selected-course">None</p>
+            <a href="course.html" class="btn btn-sm btn-primary">Change Course</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="row mt-4">
+      <!-- Payment Status -->
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Payment Status</h5>
+            <p class="text-danger" id="payment-status">Not Paid</p>
+            <a href="payment.html" class="btn btn-sm btn-primary">Proceed to Payment</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support -->
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Need Help?</h5>
+            <p>Contact our support team for assistance.</p>
+            <a href="index.html" class="btn btn-sm btn-outline-primary">Get Support</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Study Destination -->
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5>Selected Destination</h5>
+            <p id="selected-destination">Not Selected</p>
+            <a href="destination.html" class="btn btn-sm btn-primary">Choose Country</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 Global Students Abroad Council. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Load values from localStorage
+    const studentName = localStorage.getItem("studentName") || "Student";
+    const selectedCourse = localStorage.getItem("selectedCourse") || "Not Selected";
+    const selectedDestination = localStorage.getItem("selectedDestination") || "Not Selected";
+
+    document.getElementById("user-name").innerText = studentName;
+    document.getElementById("profile-name").innerText = studentName;
+    document.getElementById("selected-course").innerText = selectedCourse;
+    document.getElementById("selected-destination").innerText = selectedDestination;
+    document.getElementById("profile-email").innerText = studentName.toLowerCase().replace(" ", "") + "@gmail.com";
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

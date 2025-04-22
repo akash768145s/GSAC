@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment | GSAC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1.0">
+    <style>
+        .payment-option { display: none; }
+        .payment-option.active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GSAC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="payment.html">Payments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tracking.html">Tracking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="support.html">Support</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Payment Section -->
+    <div class="container mt-5">
+        <h2 class="text-center">Secure Payment</h2>
+        <p class="text-center">Complete your enrollment by making a payment.</p>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <form id="payment-form">
+                        <div class="mb-3">
+                            <label for="payment-method" class="form-label">Select Payment Method</label>
+                            <select class="form-control" id="payment-method" required>
+                                <option value="credit-card">Credit/Debit Card</option>
+                                <option value="upi">UPI</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+
+                        <!-- Card Payment Fields -->
+                        <div id="credit-card-payment" class="payment-option active">
+                            <input type="text" class="form-control mb-2" placeholder="Card Number" required>
+                            <input type="text" class="form-control mb-2" placeholder="Name on Card" required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control mb-2" placeholder="Expiry (MM/YY)" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control mb-2" placeholder="CVV" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UPI Payment Fields -->
+                        <div id="upi-payment" class="payment-option">
+                            <input type="text" class="form-control mb-2" placeholder="Enter UPI ID (e.g. abc@upi)" required>
+                        </div>
+
+                        <!-- PayPal Payment Fields -->
+                        <div id="paypal-payment" class="payment-option text-center">
+                            <p>Click below to proceed with PayPal.</p>
+                            <button type="button" class="btn btn-warning w-100 mb-3" onclick="confirmPayment()">Pay with PayPal</button>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-2">Proceed to Pay</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Global Students Abroad Council. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const methodSelect = document.getElementById('payment-method');
+        const options = {
+            'credit-card': document.getElementById('credit-card-payment'),
+            'upi': document.getElementById('upi-payment'),
+            'paypal': document.getElementById('paypal-payment')
+        };
+
+        methodSelect.addEventListener('change', () => {
+            for (let key in options) {
+                options[key].classList.remove('active');
+            }
+            options[methodSelect.value].classList.add('active');
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Payment Successful! Redirecting to confirmation page...");
+            window.location.href = "confirmation.html";
+        });
+
+        function confirmPayment() {
+            alert("Redirecting to PayPal for payment...");
+            window.location.href = "confirmation.html";
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

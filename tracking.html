@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Tracking | GSAC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GSAC</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="tracking.html">Tracking</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tracking Content -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-3">Track Your Application</h2>
+        <p class="text-center mb-4">Check your application progress and status updates.</p>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow p-4">
+                    <h5 class="text-center text-primary mb-3">Application Status</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>Application ID:</strong> <span id="application-id">GSAC-20251234</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Current Status:</strong> <span id="status" class="text-warning">Pending</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Document Verification:</strong> <span id="verification" class="text-danger">Incomplete</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Visa Processing:</strong> <span id="visa-status" class="text-secondary">Not Started</span>
+                        </li>
+                    </ul>
+
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary" onclick="updateStatus()">Refresh Status</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 Global Students Abroad Council. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function updateStatus() {
+            const statuses = ["Pending", "Under Review", "Approved", "Rejected"];
+            const verificationStatuses = ["Incomplete", "In Progress", "Completed"];
+            const visaStatuses = ["Not Started", "Processing", "Approved"];
+
+            document.getElementById("status").innerText = statuses[Math.floor(Math.random() * statuses.length)];
+            document.getElementById("verification").innerText = verificationStatuses[Math.floor(Math.random() * verificationStatuses.length)];
+            document.getElementById("visa-status").innerText = visaStatuses[Math.floor(Math.random() * visaStatuses.length)];
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Country Details | GSAC</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+
+      header {
+        background: linear-gradient(
+            135deg,
+            rgba(0, 123, 255, 0.9),
+            rgba(0, 123, 255, 0.5)
+          ),
+          url("images/flags/placeholder.png") no-repeat right center;
+        background-size: cover;
+        background-blend-mode: overlay;
+        color: #fff;
+        padding: 5rem 1rem 3rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .univ-card {
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 1rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .univ-card:hover {
+        background-color: #e9f2ff;
+        transform: translateY(-2px);
+      }
+
+      footer {
+        background-color: #0d6efd;
+        color: white;
+        padding: 1rem;
+        margin-top: 4rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">GSAC</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="student_details.html">Student Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="destination.html"
+                >Destinations</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+      <div class="container">
+        <h1 id="country-name">Country Name</h1>
+        <p id="country-overview">Overview appears here.</p>
+      </div>
+    </header>
+
+    <!-- UNIVERSITY CARDS -->
+    <div class="container mt-5">
+      <h3 id="top-univ-title" class="mb-4 fw-semibold"></h3>
+      <div id="top-univ-grid" class="row g-4"></div>
+    </div>
+
+    <!-- MODAL FOR DETAILS -->
+    <div class="modal fade" id="univDetailModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="univName">University Name</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Popular Courses:</strong> <span id="univCourses"></span>
+            </p>
+            <p>
+              <strong>Annual Tuition Fees:</strong> <span id="univFees"></span>
+            </p>
+            <p>
+              <strong>Living Costs (Monthly):</strong>
+              <span id="univLiving"></span>
+            </p>
+            <p><strong>VISA Process:</strong> <span id="univVisa"></span></p>
+            <p>
+              <strong>Scholarships:</strong> <span id="univScholarships"></span>
+            </p>
+            <p>
+              <strong>Total Annual Cost:</strong> <span id="univTotal"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="text-center">
+      &copy; 2025 Global Students Abroad Council. All Rights Reserved.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <!-- BOOTSTRAP + SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Everything before remains same... -->
+
+    <script>
+     
+
+      const countries = {
+        "United States": {
+          overview:
+            "The United States offers world-class research universities, cutting-edge labs, and a diverse student body. It remains the top choice for Indian graduates seeking master&apos;s and PhD programs.",
+          topUniversities: [
+            "New York University",
+            "Carnegie Mellon University",
+            "Northeastern University",
+            "Illinois Institute of Technology",
+            "University of Southern California",
+            "Columbia University",
+            "University of California, Berkeley",
+            "Harvard University",
+            "Stanford University",
+            "University of Illinois at Urbana-Champaign",
+          ],
+          universityDetails: {
+            "New York University": {
+              name: "New York University (NYU)",
+              courses:
+                "Computer Science, Engineering, Business Administration, Data Science",
+              fees: "~$58,000 (USD) ≈ ₹48 lakh",
+              living: "~$2,000 (New York City) ≈ ₹1.65 lakh",
+              visa: "F-1 visa (I-20 from university, SEVIS fee, DS-160 form, interview)",
+              scholarships:
+                "Provost&apos;s Global Scholarship, Fulbright-Nehru, STEM fellowships",
+              total: "~$82,000 (tuition + living) ≈ ₹68 lakh",
+            },
+            "Carnegie Mellon University": {
+              name: "Carnegie Mellon University (CMU)",
+              courses:
+                "Computer Science, Electrical & Computer Engineering, Robotics, Information Systems",
+              fees: "$60,000–$72,000 ≈ ₹50–60 lakh",
+              living: "~$1,500 (Pittsburgh) ≈ ₹1.2 lakh",
+              visa: "F-1 visa (I-20, SEVIS, DS-160, interview; strong financial docs required)",
+              scholarships:
+                "Inlaks Scholarship, Tata Scholarships, limited CMU fellowships",
+              total: "~$78,000 (lower-end tuition + living) ≈ ₹65 lakh",
+            },
+            "Northeastern University": {
+              name: "Northeastern University",
+              courses:
+                "Information Systems, Data Analytics, Biotechnology, Business (Analytics and MBA)",
+              fees: "~$56,500 ≈ ₹47 lakh",
+              living: "~$1,800 (Boston) ≈ ₹1.5 lakh",
+              visa: "F-1 visa (I-20, proof of one-year funds, interview appointment)",
+              scholarships:
+                "Merit scholarships (partial tuition), graduate assistantships, National Overseas Scholarship",
+              total: "~$78,100 ≈ ₹65 lakh",
+            },
+            "Illinois Institute of Technology": {
+              name: "Illinois Institute of Technology (IIT Chicago)",
+              courses:
+                "Computer Science, Electrical Engineering, Civil Engineering, Industrial Technology",
+              fees: "~$50,000 ≈ ₹41 lakh",
+              living: "~$1,500 (Chicago) ≈ ₹1.2 lakh",
+              visa: "F-1 visa (I-20, proof of ~1.5× total cost, DS-160, interview)",
+              scholarships:
+                "IIT Presidential Scholarship (partial tuition), external STEM scholarships",
+              total: "~$68,000 ≈ ₹56 lakh",
+            },
+            "University of Southern California": {
+              name: "University of Southern California (USC)",
+              courses:
+                "Computer Science, Data Science, Business Management, Film & Media",
+              fees: "~$61,000 ≈ ₹50 lakh",
+              living: "~$1,800 (Los Angeles) ≈ ₹1.5 lakh",
+              visa: "F-1 visa (I-20, SEVIS fee, DS-160, interview; proof of ~$80,000 funds)",
+              scholarships:
+                "USC merit scholarships (competitive), Rotary Global Grant",
+              total: "~$82,600 ≈ ₹69 lakh",
+            },
+            "Columbia University": {
+              name: "Columbia University",
+              courses:
+                "Data Science, Business (MBA), Finance, Electrical Engineering, Public Policy",
+              fees: "~$65,000 ≈ ₹54 lakh",
+              living: "~$2,200 (NYC) ≈ ₹1.8 lakh",
+              visa: "F-1 visa (I-20, one-year financials, interview in home country)",
+              scholarships:
+                "Need-based aid (UG), graduate fellowships (J.N. Tata, Fulbright)",
+              total: "~$91,400 ≈ ₹76 lakh",
+            },
+            "University of California, Berkeley": {
+              name: "University of California, Berkeley (UCB)",
+              courses:
+                "Computer Science, Data Science, Chemical Engineering, Business (MBA)",
+              fees: "~$50,000 ≈ ₹41 lakh",
+              living: "~$1,800 (Bay Area) ≈ ₹1.5 lakh",
+              visa: "F-1 visa (I-20, financial docs, consular interview; high living costs)",
+              scholarships:
+                "Fung Fellowship, external entrepreneurship scholarships",
+              total: "~$71,600 ≈ ₹59 lakh",
+            },
+            "Harvard University": {
+              name: "Harvard University",
+              courses:
+                "Public Policy, Business (MBA), Law, Computer Science, Biomedical Sciences",
+              fees: "~$55,000 ≈ ₹46 lakh",
+              living: "~$2,000 (Boston/Cambridge) ≈ ₹1.65 lakh",
+              visa: "F-1 or J-1 visa (I-20/DS-2019, consular interview; strong docs)",
+              scholarships:
+                "Undergrad need-based aid, limited grad fellowships",
+              total: "~$79,000 ≈ ₹66 lakh",
+            },
+            "Stanford University": {
+              name: "Stanford University",
+              courses:
+                "Computer Science (AI/ML), Electrical Engineering, Business (MBA), Medicine",
+              fees: "~$57,700 ≈ ₹48 lakh",
+              living: "~$2,200 (Silicon Valley) ≈ ₹1.8 lakh",
+              visa: "F-1 visa (I-20, proof of >$90,000, interview)",
+              scholarships:
+                "Knight-Hennessy Scholars (full funding), undergrad need aid",
+              total: "~$84,100 ≈ ₹70 lakh",
+            },
+            "University of Illinois at Urbana-Champaign": {
+              name: "UIUC",
+              courses:
+                "Computer Science, Data Science, Mechanical Engineering, Agricultural Sciences",
+              fees: "~$36,000 ≈ ₹30 lakh",
+              living: "~$1,200 (Champaign-Urbana) ≈ ₹1 lakh",
+              visa: "F-1 visa (I-20, tuition + ~$14,000 living, DS-160, interview)",
+              scholarships:
+                "Limited UIUC merit aid for internationals, external awards",
+              total: "~$50,400 ≈ ₹42 lakh",
+            },
+          },
+        },
+
+        "United Kingdom": {
+          overview:
+            "The UK boasts centuries-old institutions with one-year master&apos;s programs and a strong research focus. Shorter course durations and post-study work visas attract many Indian students.",
+          topUniversities: [
+            "University of Oxford",
+            "University of Cambridge",
+            "Imperial College London",
+            "University College London",
+            "University of Edinburgh",
+            "King&apos;s College London",
+            "University of Manchester",
+            "University of Birmingham",
+            "Coventry University",
+            "University of Glasgow",
+          ],
+          universityDetails: {
+            "University of Oxford": {
+              name: "University of Oxford",
+              courses:
+                "Computer Science, Business Management, Law, Medicine, Engineering",
+              fees: "£35,000–£59,000 ≈ ₹35–60 lakh",
+              living:
+                "£1,200 (Oxford college accommodation + food) ≈ ₹1.2 lakh",
+              visa: "UK Student Visa (CAS, funds: 1 yr tuition + £1,334/mo London or £1,023 elsewhere, English proof, IHS)",
+              scholarships:
+                "Rhodes Scholarship, Weidenfeld-Hoffmann, Commonwealth Scholarship",
+              total: "£49,400 (mid-range tuition + living) ≈ ₹50 lakh",
+            },
+            "University of Cambridge": {
+              name: "University of Cambridge",
+              courses:
+                "Engineering, Computer Science, Natural Sciences, Economics, MBA",
+              fees: "£33,000–£58,000 ≈ ₹33–58 lakh",
+              living: "£1,100 (Cambridge) ≈ ₹1.1 lakh",
+              visa: "UK Student Visa (CAS, same funds proof as Oxford)",
+              scholarships:
+                "Gates Cambridge, Cambridge Trust, Commonwealth & Inlaks Scholarships",
+              total: "£46,200 ≈ ₹47 lakh",
+            },
+            "Imperial College London": {
+              name: "Imperial College London",
+              courses:
+                "Mechanical & Electrical Engineering, Data Science, MBA, Medicine",
+              fees: "£35,000 ≈ ₹35 lakh",
+              living: "£1,400 (London) ≈ ₹1.4 lakh",
+              visa: "UK Student Visa (CAS, £1,334/mo living ×9 mo + tuition)",
+              scholarships:
+                "Imperial India Foundation, GREAT Scholarships, dept. awards",
+              total: "£51,600 ≈ ₹52 lakh",
+            },
+            "University College London": {
+              name: "University College London (UCL)",
+              courses:
+                "Computer Science, Architecture, Economics, Medicine, Law",
+              fees: "£28,000–£40,000 ≈ ₹28–40 lakh",
+              living: "£1,300 (London) ≈ ₹1.3 lakh",
+              visa: "UK Student Visa (CAS, funds + NHS surcharge)",
+              scholarships: "UCL Global Masters, UCL India Scholarship",
+              total: "£43,200 ≈ ₹44 lakh",
+            },
+            "University of Edinburgh": {
+              name: "University of Edinburgh",
+              courses:
+                "Informatics, Renewable Energy, Finance, Arts & Humanities",
+              fees: "£25,300–£35,000 ≈ ₹25–35 lakh",
+              living: "£1,000 (Edinburgh) ≈ ₹1 lakh",
+              visa: "UK Student Visa (CAS, £9,000 living ×9 mo + tuition)",
+              scholarships: "Edinburgh Global Scholarships, Chevening",
+              total: "£37,300 ≈ ₹38 lakh",
+            },
+            "King&apos;s College London": {
+              name: "King&apos;s College London (KCL)",
+              courses: "Medicine, Law, International Relations, Engineering",
+              fees: "£29,000 ≈ ₹29 lakh",
+              living: "£1,300 (London) ≈ ₹1.3 lakh",
+              visa: "UK Student Visa (CAS, London rates)",
+              scholarships:
+                "King&apos;s India PG Scholarship, Commonwealth Shared Scholarships",
+              total: "£44,600 ≈ ₹45 lakh",
+            },
+            "University of Manchester": {
+              name: "University of Manchester",
+              courses:
+                "Computer Science, Data Science, Mechanical Engineering, MBA",
+              fees: "£25,000 ≈ ₹25 lakh",
+              living: "£900 (Manchester) ≈ ₹90,000",
+              visa: "UK Student Visa (CAS, £1,023/mo living ×9 mo)",
+              scholarships:
+                "Global Futures Scholarship, India Chevening Scholarships",
+              total: "£35,800 ≈ ₹36 lakh",
+            },
+            "University of Birmingham": {
+              name: "University of Birmingham",
+              courses: "Mechanical Engineering, Business, Law, Psychology",
+              fees: "£23,000 ≈ ₹23 lakh",
+              living: "£900 (Birmingham) ≈ ₹90,000",
+              visa: "UK Student Visa (CAS, £9,207 living ×9 mo)",
+              scholarships:
+                "India Outstanding Achievement Scholarships, Commonwealth Masters",
+              total: "£33,700 ≈ ₹34 lakh",
+            },
+            "Coventry University": {
+              name: "Coventry University",
+              courses: "Computer Science, Automotive Engineering, Business",
+              fees: "£18,000 ≈ ₹18 lakh",
+              living: "£800 (Coventry) ≈ ₹80,000",
+              visa: "UK Student Visa (CAS, £1,023/mo living ×9 mo)",
+              scholarships:
+                "Coventry India Scholarship (£1,500–£2,000), GREAT Scholarship",
+              total: "£27,600 ≈ ₹28 lakh",
+            },
+            "University of Glasgow": {
+              name: "University of Glasgow",
+              courses: "Engineering, Life Sciences, Computing, Arts",
+              fees: "£23,000 ≈ ₹23 lakh",
+              living: "£900 (Glasgow) ≈ ₹90,000",
+              visa: "UK Student Visa (CAS, UKVI funds)",
+              scholarships:
+                "Glasgow International Scholarship, Saltire Scholarships",
+              total: "£33,700 ≈ ₹34 lakh",
+            },
+          },
+        },
+
+        Canada: {
+          overview:
+            "Canada offers world-class universities, affordable tuition fees, and post-study work permits. The Student Direct Stream speeds up visa processing for Indian students.",
+          topUniversities: [
+            "University of Toronto",
+            "University of British Columbia",
+            "McGill University",
+            "University of Waterloo",
+            "University of Alberta",
+            "York University",
+            "Simon Fraser University",
+            "McMaster University",
+            "University of Calgary",
+            "Concordia University",
+          ],
+          universityDetails: {
+            "University of Toronto": {
+              name: "University of Toronto (U of T)",
+              courses:
+                "Computer Science, Data Science, Finance, Biotechnology, MBA",
+              fees: "~CAD 60,000 (UG) ≈ ₹36 lakh",
+              living: "~CAD 1,500 (Toronto) ≈ ₹90,000",
+              visa: "Study Permit via SDS (offer letter, DLI, GIC CAD 10,000/20,635, first-year tuition proof)",
+              scholarships:
+                "U of T International Scholar Award, Lester B. Pearson Scholarship, OGS",
+              total: "~CAD 78,000 (tuition + living) ≈ ₹47 lakh",
+            },
+            "University of British Columbia": {
+              name: "University of British Columbia (UBC)",
+              courses: "Computer Science, Engineering, Earth Sciences, MBA",
+              fees: "~CAD 65,000 (e.g. MS Data Science) ≈ ₹39 lakh",
+              living: "~CAD 1,300 (Vancouver) ≈ ₹78,000",
+              visa: "Study Permit (SDS recommended: GIC + tuition payment). Eligible for PGWP.",
+              scholarships:
+                "International Major Entrance Scholarship, grad assistantships, Mitacs",
+              total: "~CAD 80,000 ≈ ₹48 lakh",
+            },
+            "McGill University": {
+              name: "McGill University",
+              courses:
+                "Computer Science, Economics, Medicine, Mechanical Engineering",
+              fees: "~CAD 42,000 (arts/sci UG)–60,000 (ENG) ≈ ₹25–35 lakh",
+              living: "~CAD 1,200 (Montreal) ≈ ₹72,000",
+              visa: "Study Permit (acceptance letter, proof CAD 10,000 living + tuition). CAQ for Quebec.",
+              scholarships:
+                "McGill Entrance Scholarships (up to CAD 10,000), need-based bursaries, Trudeau Foundation",
+              total: "~CAD 56,400 ≈ ₹34 lakh",
+            },
+            "University of Waterloo": {
+              name: "University of Waterloo",
+              courses:
+                "Computer Science, Software Engineering, Mathematics, Data Science (co-op)",
+              fees: "~CAD 60,000 (ENG/CS co-op) ≈ ₹36 lakh",
+              living: "~CAD 1,000 (Waterloo) ≈ ₹60,000",
+              visa: "Study Permit (SDS: GIC + fees). Co-op addendum authorizes work terms.",
+              scholarships:
+                "International Master’s Award of Excellence, Ontario Trillium Scholarship",
+              total: "~CAD 72,000 ≈ ₹43 lakh",
+            },
+            "University of Alberta": {
+              name: "University of Alberta (UAlberta)",
+              courses:
+                "Petroleum Engineering, Computer Science, MBA, Environmental Science",
+              fees: "~CAD 50,000 ≈ ₹30 lakh",
+              living: "~CAD 1,000 (Edmonton) ≈ ₹60,000",
+              visa: "Study Permit (proof tuition + CAD ~10,000 living).",
+              scholarships:
+                "Global Citizenship Scholarship, Alberta Innovates research awards",
+              total: "~CAD 62,000 ≈ ₹37 lakh",
+            },
+            "York University": {
+              name: "York University (Schulich)",
+              courses: "Business, Computer Science, Psychology, Law",
+              fees: "~CAD 40,000 ≈ ₹24 lakh",
+              living: "~CAD 1,300 (Toronto) ≈ ₹78,000",
+              visa: "Study Permit (SDS route; York issues acceptance letter).",
+              scholarships:
+                "International Student Scholarship (CAD 5–10k), Schulich awards",
+              total: "~CAD 55,600 ≈ ₹33 lakh",
+            },
+            "Simon Fraser University": {
+              name: "Simon Fraser University (SFU)",
+              courses:
+                "Computer Science, Big Data, Business, Engineering (Mechatronics)",
+              fees: "~CAD 35,000 ≈ ₹21 lakh",
+              living: "~CAD 1,200 (Burnaby/Vancouver) ≈ ₹72,000",
+              visa: "Study Permit (SDS: GIC + fees; FIC pathway still needs permit).",
+              scholarships: "SFU India Entrance Scholarship, TA/RA positions",
+              total: "~CAD 49,400 ≈ ₹30 lakh",
+            },
+            "McMaster University": {
+              name: "McMaster University",
+              courses:
+                "Health Sciences, MBA, Engineering (Automotive, Materials), Computer Science",
+              fees: "~CAD 40,000 ≈ ₹24 lakh",
+              living: "~CAD 1,000 (Hamilton) ≈ ₹60,000",
+              visa: "Study Permit (SDS applicable; DLI with strong visa success)",
+              scholarships: "McMaster India Scholarship, OGS, Mitacs",
+              total: "~CAD 52,000 ≈ ₹31 lakh",
+            },
+            "University of Calgary": {
+              name: "University of Calgary",
+              courses:
+                "Geomatics Engineering, Petroleum Engineering, MBA, Computer Science",
+              fees: "~CAD 38,000 ≈ ₹23 lakh",
+              living: "~CAD 1,100 (Calgary) ≈ ₹66,000",
+              visa: "Study Permit (proof funds ~CAD 10k living + tuition).",
+              scholarships:
+                "International Entrance Scholarship (CAD 15k), Alberta Innovates",
+              total: "~CAD 51,200 ≈ ₹31 lakh",
+            },
+            "Concordia University": {
+              name: "Concordia University",
+              courses:
+                "Computer Science, Software Engineering, Information Systems, Visual Arts",
+              fees: "~CAD 24,000 (Quebec UG) ≈ ₹14 lakh",
+              living: "~CAD 1,000 (Montreal) ≈ ₹60,000",
+              visa: "Study Permit + CAQ for Quebec studies.",
+              scholarships:
+                "Presidential Scholarship (tuition + living), Quebec gov bursaries",
+              total: "~CAD 36,000 ≈ ₹22 lakh",
+            },
+          },
+        },
+
+        Australia: {
+          overview:
+            "Australia has high-ranked institutions, strong research funding, and a favorable post-study work visa. The Student Visa 500 stream is straightforward for Indian students.",
+          topUniversities: [
+            "University of Melbourne",
+            "University of Sydney",
+            "University of New South Wales",
+            "Australian National University",
+            "Monash University",
+            "University of Queensland",
+            "University of Adelaide",
+            "University of Western Australia",
+            "University of Technology Sydney",
+            "Macquarie University",
+          ],
+          universityDetails: {
+            "University of Melbourne": {
+              name: "University of Melbourne",
+              courses:
+                "Computer Science, Data Science, MBA, Medicine, Accounting",
+              fees: "~AUD 40,000–55,000 ≈ ₹22–30 lakh",
+              living: "~AUD 2,000 (Melbourne) ≈ ₹1.1 lakh",
+              visa: "Student Visa 500 (CoE, OSHC, proof ~AUD 62,500 funds, GTE)",
+              scholarships:
+                "Melbourne International Scholarship, Australia Awards, Grad Research Scholarships",
+              total: "~AUD 65,000 (tuition + living) ≈ ₹35 lakh",
+            },
+            "University of Sydney": {
+              name: "University of Sydney",
+              courses:
+                "Data Science, Medicine, Business Analytics, Engineering",
+              fees: "~AUD 45,000–55,000 ≈ ₹25–31 lakh",
+              living: "~AUD 2,200 (Sydney) ≈ ₹1.2 lakh",
+              visa: "Student Visa 500 (CoE, proof ~AUD 62,222 funds, OSHC, GTE)",
+              scholarships:
+                "Sydney Scholars India Scholarship, Australia Awards, CSIRO Data61",
+              total: "~AUD 71,400 ≈ ₹39 lakh",
+            },
+            "University of New South Wales": {
+              name: "University of New South Wales (UNSW)",
+              courses:
+                "Computer Science, Information Systems, Civil Engineering, MBA",
+              fees: "~AUD 65,000 ≈ ₹37–38 lakh",
+              living: "~AUD 2,200 (Sydney) ≈ ₹1.2 lakh",
+              visa: "Student Visa 500 (CoE, proof ~AUD 62k, OSHC, English reqs)",
+              scholarships:
+                "UNSW International Scholarships, Future of Change India Scholarship",
+              total: "~AUD 91,400 ≈ ₹50 lakh",
+            },
+            "Australian National University": {
+              name: "Australian National University (ANU)",
+              courses:
+                "International Relations, Data Analytics, Computer Science, Earth Sciences",
+              fees: "~AUD 48,500 ≈ ₹27 lakh",
+              living: "~AUD 1,800 (Canberra) ≈ ₹1 lakh",
+              visa: "Student Visa 500 (CoE, proof ~AUD 60k funds, OSHC, GTE)",
+              scholarships:
+                "ANU Chancellor’s Scholarship, India Global Leaders Scholarship",
+              total: "~AUD 70,100 ≈ ₹38 lakh",
+            },
+            "Monash University": {
+              name: "Monash University",
+              courses:
+                "Pharmacy, Data Science, Business, Engineering (Chemical)",
+              fees: "~AUD 45,000 ≈ ₹25 lakh",
+              living: "~AUD 1,800 (Melbourne) ≈ ₹1 lakh",
+              visa: "Student Visa 500 (CoE, OSHC, GTE)",
+              scholarships:
+                "Monash Merit Scholarship, Monash–India Scholarship",
+              total: "~AUD 66,600 ≈ ₹36 lakh",
+            },
+            "University of Queensland": {
+              name: "University of Queensland (UQ)",
+              courses:
+                "Biotechnology, MBA, Mining Engineering, Hospitality/Tourism",
+              fees: "~AUD 41,000 ≈ ₹23 lakh",
+              living: "~AUD 1,700 (Brisbane) ≈ ₹95,000",
+              visa: "Student Visa 500 (CoE, proof ~AUD 55k funds, OSHC)",
+              scholarships:
+                "UQ India Global Leaders Scholarship, UQ International Scholarships",
+              total: "~AUD 61,400 ≈ ₹34 lakh",
+            },
+            "University of Adelaide": {
+              name: "University of Adelaide",
+              courses:
+                "Viticulture & Oenology, Mechanical Engineering, Accounting & Finance, Dentistry",
+              fees: "~AUD 38,000 ≈ ₹21 lakh",
+              living: "~AUD 1,500 (Adelaide) ≈ ₹83,000",
+              visa: "Student Visa 500 (CoE, proof ~AUD 50k funds, OSHC)",
+              scholarships:
+                "Global Academic Excellence Scholarship (50% tuition), Ashok Khurana Scholarship",
+              total: "~AUD 56,000 ≈ ₹30 lakh",
+            },
+            "University of Western Australia": {
+              name: "University of Western Australia (UWA)",
+              courses:
+                "Marine Engineering, Mineral & Mining Engineering, MBA, Data Science",
+              fees: "~AUD 35,000 ≈ ₹19 lakh",
+              living: "~AUD 1,600 (Perth) ≈ ₹88,000",
+              visa: "Student Visa 500 (CoE, proof ~AUD 50–55k funds, OSHC)",
+              scholarships:
+                "Global Excellence Scholarship, India–Australia UWA Scholarship",
+              total: "~AUD 54,200 ≈ ₹29 lakh",
+            },
+            "University of Technology Sydney": {
+              name: "University of Technology Sydney (UTS)",
+              courses:
+                "IT (Networking, Cybersecurity), Business, Design, Mechanical Engineering",
+              fees: "~AUD 39,000 ≈ ₹21.5 lakh",
+              living: "~AUD 2,100 (Sydney) ≈ ₹1.16 lakh",
+              visa: "Student Visa 500 (CoE, proof ~AUD 60k funds, OSHC)",
+              scholarships:
+                "UTS Pathway Scholarship, UTS International Scholarships",
+              total: "~AUD 64,200 ≈ ₹35 lakh",
+            },
+            "Macquarie University": {
+              name: "Macquarie University",
+              courses:
+                "Data Science, Applied Finance, Media, Telecommunications",
+              fees: "~AUD 36,000 ≈ ₹20 lakh",
+              living: "~AUD 1,900 (Sydney) ≈ ₹1.05 lakh",
+              visa: "Student Visa 500 (CoE, proof ~AUD 58k funds, OSHC)",
+              scholarships:
+                "Macquarie India Scholarship, Vice-Chancellor’s International Scholarships",
+              total: "~AUD 59,800 ≈ ₹33 lakh",
+            },
+          },
+        },
+
+        Germany: {
+          overview:
+            "Germany offers tuition-free public universities, strong engineering and technical programs, and a straightforward visa process with blocked account requirement.",
+          topUniversities: [
+            "Technical University of Munich",
+            "RWTH Aachen University",
+            "Heidelberg University",
+            "University of Duisburg-Essen",
+            "Technical University of Berlin",
+            "University of Stuttgart",
+            "Karlsruhe Institute of Technology",
+            "LMU Munich",
+            "Freie Universitat Berlin",
+            "Offenburg University of Applied Sciences",
+          ],
+          universityDetails: {
+            "Technical University of Munich": {
+              name: "Technical University of Munich (TUM)",
+              courses:
+                "Mechanical Engineering, Computer Science, Electrical Engineering, MBA Management & Technology",
+              fees: "No tuition; semester fee ~€150",
+              living: "€1,000 (Munich) ≈ ₹90,000",
+              visa: "German Student Visa (admission letter, blocked account €11,208, health insurance)",
+              scholarships:
+                "DAAD Scholarships, Deutschlandstipendium (€300/mo), Bayer Foundations",
+              total: "≈€12,000 (living only) ≈ ₹10.8 lakh",
+            },
+            "RWTH Aachen University": {
+              name: "RWTH Aachen University",
+              courses:
+                "Mechanical Engineering, Electrical Engineering, Data Science",
+              fees: "No tuition; social fee ~€300",
+              living: "€800 (Aachen) ≈ ₹72,000",
+              visa: "German Student Visa (blocked account €11k, admission letter)",
+              scholarships:
+                "DAAD, RWTH International Academy, industrial scholarships (BMW, Siemens)",
+              total: "≈€9,900 ≈ ₹9 lakh",
+            },
+            "Heidelberg University": {
+              name: "Heidelberg University",
+              courses: "Medicine, Biosciences, Physics, Data Science",
+              fees: "€3,000/yr (non-EU) + €170 semester fee ≈ ₹2.7 lakh",
+              living: "€750 (Heidelberg) ≈ ₹68,000",
+              visa: "German Student Visa (blocked account €11k, health insurance)",
+              scholarships:
+                "DAAD IIT sandwich, KAAD, Heidelberg University Scholarships",
+              total: "≈€12,000 (fees + living) ≈ ₹10.8 lakh",
+            },
+            "University of Duisburg-Essen": {
+              name: "University of Duisburg-Essen",
+              courses:
+                "Mechanical Engineering, Embedded Systems, MBA, Cognitive Sciences",
+              fees: "No tuition; semester fee ~€320",
+              living: "€700 (Ruhr area) ≈ ₹63,000",
+              visa: "German Student Visa (blocked account, admission letter)",
+              scholarships: "DAAD, Erasmus+, merit scholarships (€300/mo)",
+              total: "≈€8,700 ≈ ₹7.8 lakh",
+            },
+            "Technical University of Berlin": {
+              name: "Technical University of Berlin",
+              courses:
+                "Computer Science, Electrical Engineering, Renewable Energy, Chemical Engineering",
+              fees: "No tuition; semester fee ~€307",
+              living: "€900 (Berlin) ≈ ₹81,000",
+              visa: "German Student Visa (blocked account €11k, residence permit process)",
+              scholarships: "TU Berlin President’s Scholarship, DAAD",
+              total: "≈€10,800 ≈ ₹9.7 lakh",
+            },
+            "University of Stuttgart": {
+              name: "University of Stuttgart",
+              courses:
+                "Automotive Engineering, Aerospace Engineering, Process Engineering, Infrastructure Planning",
+              fees: "€3,000/yr (non-EU) ≈ ₹2.7 lakh",
+              living: "€800 (Stuttgart) ≈ ₹72,000",
+              visa: "German Student Visa (blocked account €11k)",
+              scholarships: "DAAD, COMMAS partial waivers, Bosch scholarships",
+              total: "≈€12,600 ≈ ₹11.3 lakh",
+            },
+            "Karlsruhe Institute of Technology": {
+              name: "Karlsruhe Institute of Technology (KIT)",
+              courses:
+                "Computer Science, Mechanical Engineering, Energy Science",
+              fees: "€3,000/yr + €170 admin ≈ ₹2.7 lakh",
+              living: "€750 (Karlsruhe) ≈ ₹68,000",
+              visa: "German Student Visa (blocked account, admission letter via VFS)",
+              scholarships:
+                "Deutschlandstipendium, Industrieclub Karlsruhe, KIT-Scholarship",
+              total: "≈€12,200 ≈ ₹11 lakh",
+            },
+            "LMU Munich": {
+              name: "Ludwig Maximilian University of Munich (LMU)",
+              courses: "Data Science, Medicine, Management, Physics",
+              fees: "No tuition; semester fee ~€144",
+              living: "€1,000 (Munich) ≈ ₹90,000",
+              visa: "German Student Visa (blocked account, early accommodation proof)",
+              scholarships: "LMU travel grants, DAAD, Bayer Foundations",
+              total: "≈€12,000 ≈ ₹10.8 lakh",
+            },
+            "Freie Universitat Berlin": {
+              name: "Freie Universitat Berlin",
+              courses:
+                "Social Sciences, Computer Science, Biology, European Studies",
+              fees: "No tuition; semester fee ~€311",
+              living: "€850 (Berlin) ≈ ₹77,000",
+              visa: "German Student Visa (standard)",
+              scholarships: "AvH, Erasmus Mundus, FU Berlin PhD scholarships",
+              total: "≈€10,500 ≈ ₹9.5 lakh",
+            },
+            "Offenburg University of Applied Sciences": {
+              name: "Offenburg University of Applied Sciences",
+              courses:
+                "Communications & Media Engineering, Energy Conversion, MBA Intl Business Consulting",
+              fees: "€1,500–€3,000 ≈ ₹1.4–2.8 lakh",
+              living: "€700 (Offenburg) ≈ ₹63,000",
+              visa: "German Student Visa (blocked account €11k)",
+              scholarships:
+                "DAAD, Baden-Wurttemberg STIPendium, limited waivers",
+              total: "≈€12,900 ≈ ₹11.6 lakh",
+            },
+          },
+        },
+
+        France: {
+          overview:
+            "France provides low public tuition, diverse programs via Campus France, and proof of €615/month living costs for visa. Prestigious scholarships like Eiffel are available.",
+          topUniversities: [
+            "Universite PSL",
+            "Sorbonne University",
+            "INSEAD Fontainebleau",
+            "HEC Paris",
+            "Ecole Polytechnique",
+            "ESSEC Business School",
+            "Universite Paris-Saclay",
+            "INP Grenoble",
+            "IESEG School of Management",
+            "Ecole des Ponts ParisTech",
+          ],
+          universityDetails: {
+            "Universite PSL": {
+              name: "Universite PSL (Paris Sciences et Lettres)",
+              courses:
+                "Data Science, Luxury Management, Physics, Diplomacy (PSIA)",
+              fees: "€0–€15,000 ≈ ₹13–14 lakh",
+              living: "€1,200 (Paris) ≈ ₹1.08 lakh",
+              visa: "France VLS-TS (Campus France NOC, proof €615/mo + tuition or scholarship)",
+              scholarships:
+                "Eiffel Scholarship, Charpak Scholarship, PSL Excellence Fellowships",
+              total: "€21,000 (tuition + living) ≈ ₹18.9 lakh",
+            },
+            "Sorbonne University": {
+              name: "Sorbonne University",
+              courses: "Literature, Computer Science, Engineering, Economics",
+              fees: "€2,770 (UG)/€3,770 (MSc) ≈ ₹2.7–3.7 lakh",
+              living: "€1,100 (Paris) ≈ ₹99,000",
+              visa: "France student visa (Etudes en France, Campus France interview, VFS)",
+              scholarships: "Eiffel, MIEM Scholarship, Charpak",
+              total: "€16,070 ≈ ₹14.5 lakh",
+            },
+            "INSEAD Fontainebleau": {
+              name: "INSEAD (Fontainebleau)",
+              courses: "MBA, Executive MBA",
+              fees: "€97,000 ≈ ₹87 lakh",
+              living: "€2,000 (Fontainebleau) ≈ ₹1.8 lakh",
+              visa: "France student visa (multi-country for Singapore portion)",
+              scholarships:
+                "INSEAD need-based & diversity awards, Indian Alumni Scholarship",
+              total: "€117,000 ≈ ₹1.05 crore",
+            },
+            "HEC Paris": {
+              name: "HEC Paris",
+              courses: "MBA, MiM, MSc Finance",
+              fees: "€54,000 (MBA)/€42,000 (MiM) ≈ ₹48/₹37 lakh",
+              living: "€1,000 (Jouy-en-Josas) ≈ ₹90,000",
+              visa: "France student visa (acceptance, proof €615×months + tuition)",
+              scholarships: "HEC-Eiffel, HEC merit & need-based, Forté",
+              total: "€66,000 ≈ ₹59 lakh",
+            },
+            "Ecole Polytechnique": {
+              name: "Ecole Polytechnique (L'X)",
+              courses: "MSc AI, MSc Energy Env, Ingénieur Diploma",
+              fees: "€15,000 ≈ ₹13.5 lakh (MSc); <€1,000 (Ingénieur)",
+              living: "€800 (Palaiseau) ≈ ₹72,000",
+              visa: "France student visa (Campus France, proof €615/mo)",
+              scholarships: "Fondation Polytechnique Excellence, Eiffel",
+              total: "€24,600 ≈ ₹22 lakh",
+            },
+            "ESSEC Business School": {
+              name: "ESSEC Business School",
+              courses:
+                "Global MBA, MiM, MSc Data Sciences & Business Analytics",
+              fees: "€45,000 (MBA)/€37,000 (MiM) ≈ ₹40/₹32 lakh",
+              living: "€1,000 (Cergy) ≈ ₹90,000",
+              visa: "France student visa (Campus France)",
+              scholarships:
+                "ESSEC MBA scholarships, Charpak, Fondation Rainbow",
+              total: "€57,000 ≈ ₹51 lakh",
+            },
+            "Universite Paris-Saclay": {
+              name: "Universite Paris-Saclay",
+              courses: "MSc AI, Nuclear Physics, Biotech, AgTech",
+              fees: "€3,770 (public MSc) ≈ ₹3.5 lakh",
+              living: "€800 (Saclay) ≈ ₹72,000",
+              visa: "France student visa (Campus France NOC)",
+              scholarships:
+                "International Master’s Scholarship (€10,000/yr + travel)",
+              total: "€13,370 (with scholarship) ≈ ₹12 lakh",
+            },
+            "INP Grenoble": {
+              name: "INP Grenoble (Grenoble INP)",
+              courses: "Electronics, Hydropower, Nanotech, MBA",
+              fees: "€5,000 ≈ ₹4.5 lakh",
+              living: "€700 (Grenoble) ≈ ₹63,000",
+              visa: "France student visa (proof €615×12)",
+              scholarships: "Grenoble Alpes Excellence, Erasmus Mundus",
+              total: "€13,900 ≈ ₹12.5 lakh",
+            },
+            "IESEG School of Management": {
+              name: "IESEG School of Management",
+              courses: "MSc Fashion Management, Big Data, International MBA",
+              fees: "€17,500 ≈ ₹15.7 lakh",
+              living: "€800 (Lille)/€1,100 (Paris) ≈ ₹72–99k",
+              visa: "France student visa (standard)",
+              scholarships: "IESEG Merit-Based (up to 50%), Vive l’Inde",
+              total: "€27,100 ≈ ₹24.3 lakh",
+            },
+            "Ecole des Ponts ParisTech": {
+              name: "Ecole des Ponts ParisTech",
+              courses:
+                "Transport & Urban Planning, Environmental Engineering, Data Science",
+              fees: "€7,000–€15,000 ≈ ₹6.3–13.5 lakh",
+              living: "€900 (Paris suburbs) ≈ ₹81,000",
+              visa: "France student visa",
+              scholarships: "Eiffel, Ponts Foundation",
+              total: "€23,000 ≈ ₹20.7 lakh",
+            },
+          },
+        },
+
+        Singapore: {
+          overview:
+            "Singapore features top Asian universities with modern campuses, streamlined Student&apos;s Pass via SOLAR, and generous scholarships and grants.",
+          topUniversities: [
+            "National University of Singapore",
+            "Nanyang Technological University",
+            "Singapore Management University",
+            "INSEAD Singapore",
+            "James Cook University Singapore",
+            "Singapore University of Technology and Design",
+            "SIM Global Education",
+            "Kaplan Singapore",
+            "LASALLE College of the Arts",
+            "SP Jain School of Global Management",
+          ],
+          universityDetails: {
+            "National University of Singapore": {
+              name: "National University of Singapore (NUS)",
+              courses:
+                "Computer Science, Data Analytics, MBA, Engineering, Public Policy",
+              fees: "~SGD 40,000–50,000 ≈ ₹24–30 lakh",
+              living: "~SGD 1,500–2,500 (Singapore) ≈ ₹90k–₹1.5 lakh",
+              visa: "Student&apos;s Pass via SOLAR (IPA letter from ICA)",
+              scholarships:
+                "NUS Research Scholarships, ASEAN Undergraduate Scholarship",
+              total: "~SGD 58,000 ≈ ₹34 lakh",
+            },
+            "Nanyang Technological University": {
+              name: "Nanyang Technological University (NTU)",
+              courses:
+                "Computer Science, Mechanical Engineering, MBA, Biological Sciences",
+              fees: "~SGD 33,000 (with tuition grant) ≈ ₹19.5 lakh",
+              living: "~SGD 1,200 (suburbs) ≈ ₹72,000",
+              visa: "Student&apos;s Pass via SOLAR (IPA letter)",
+              scholarships:
+                "India Connect Research Internship, Nanyang Scholarship",
+              total: "~SGD 47,400 ≈ ₹28 lakh",
+            },
+            "Singapore Management University": {
+              name: "Singapore Management University (SMU)",
+              courses: "MBA, MITB, Accounting, Law",
+              fees: "~SGD 50,000 (MITB) ≈ ₹30 lakh",
+              living: "~SGD 1,800 (city center) ≈ ₹1.08 lakh",
+              visa: "Student&apos;s Pass via SOLAR",
+              scholarships: "Global Impact Scholarship, ADB-Japan Scholarship",
+              total: "~SGD 71,600 ≈ ₹42 lakh",
+            },
+            "INSEAD Singapore": {
+              name: "INSEAD (Singapore campus)",
+              courses: "MBA (half cohort), Executive Education",
+              fees: "~SGD 130,000 ≈ ₹78 lakh",
+              living: "~SGD 3,000 ≈ ₹1.8 lakh",
+              visa: "Student&apos;s Pass (IPA arranged)",
+              scholarships: "INSEAD Diversity Scholarships",
+              total: "~SGD 158,000 ≈ ₹95 lakh",
+            },
+            "James Cook University Singapore": {
+              name: "James Cook University Singapore",
+              courses:
+                "Information Technology, Business, Psychology, Hospitality",
+              fees: "~SGD 18,000 ≈ ₹10.8 lakh",
+              living: "~SGD 1,200 ≈ ₹72,000",
+              visa: "Student&apos;s Pass via SOLAR",
+              scholarships: "JCU Singapore merit scholarships",
+              total: "~SGD 32,400 ≈ ₹19 lakh",
+            },
+            "Singapore University of Technology and Design": {
+              name: "Singapore University of Technology and Design (SUTD)",
+              courses: "Design Engineering, Architecture, ICT",
+              fees: "~SGD 28,000 ≈ ₹16.8 lakh",
+              living: "~SGD 1,300 ≈ ₹78,000",
+              visa: "Student&apos;s Pass via SOLAR",
+              scholarships: "SUTD Global Excellence Scholarship",
+              total: "~SGD 43,600 ≈ ₹26 lakh",
+            },
+            "SIM Global Education": {
+              name: "SIM Global Education",
+              courses: "University of London Business, UoW Computer Science",
+              fees: "~SGD 20,000 ≈ ₹12 lakh",
+              living: "~SGD 1,500 ≈ ₹90,000",
+              visa: "Student&apos;s Pass (EduTrust-certified)",
+              scholarships: "SIM Global Education Scholarship",
+              total: "~SGD 38,000 ≈ ₹22.8 lakh",
+            },
+            "Kaplan Singapore": {
+              name: "Kaplan Singapore",
+              courses: "Accounting, Finance, MBA (partner universities)",
+              fees: "~SGD 25,000 ≈ ₹15 lakh",
+              living: "~SGD 1,600 ≈ ₹96,000",
+              visa: "Student&apos;s Pass via SOLAR",
+              scholarships: "Limited partner university awards",
+              total: "~SGD 44,200 ≈ ₹26.5 lakh",
+            },
+            "LASALLE College of the Arts": {
+              name: "LASALLE College of the Arts",
+              courses:
+                "Design Communication, Fine Arts, Animation, Arts Management",
+              fees: "~SGD 24,000 ≈ ₹14.4 lakh",
+              living: "~SGD 1,300 ≈ ₹78,000",
+              visa: "Student&apos;s Pass via ICA",
+              scholarships: "LASALLE Scholarships for Excellence",
+              total: "~SGD 39,600 ≈ ₹23.8 lakh",
+            },
+            "SP Jain School of Global Management": {
+              name: "SP Jain School of Global Management",
+              courses: "Global BBA, Master of Global Business",
+              fees: "~SGD 18,000/yr (SG segment) ≈ ₹10.8 lakh",
+              living: "~SGD 1,800 ≈ ₹1.08 lakh",
+              visa: "Student&apos;s Pass for SG campus",
+              scholarships: "SP Jain merit scholarships",
+              total: "~SGD 39,600 ≈ ₹23.8 lakh",
+            },
+          },
+        },
+
+        Japan: {
+          overview:
+            "Japan boasts tuition-friendly national universities, strong STEM fields, MEXT scholarships, and a CoE-based student visa process; living costs vary by city.",
+          topUniversities: [
+            "University of Tokyo",
+            "Kyoto University",
+            "Tokyo Institute of Technology",
+            "Osaka University",
+            "Tohoku University",
+            "Waseda University",
+            "Keio University",
+            "Hiroshima University",
+            "Nagoya University",
+            "Kyushu University",
+          ],
+          universityDetails: {
+            "University of Tokyo": {
+              name: "University of Tokyo (Todai)",
+              courses:
+                "Materials Science, Engineering, Intl Relations, MBA (SEUT)",
+              fees: "¥535,800 + ¥282,000 admission ≈ ₹3.25 lakh",
+              living: "¥150,000 (Tokyo) ≈ ₹85,000",
+              visa: "Student Visa (CoE from uni, embassy visa), must show ~¥960,000 for 6 mo",
+              scholarships: "MEXT Scholarship, UTokyo Fellowship",
+              total: "¥2,335,800 (tuition + living) ≈ ₹13.2 lakh",
+            },
+            "Kyoto University": {
+              name: "Kyoto University",
+              courses: "Chemistry, Biotechnology, Civil Engineering, Economics",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥120,000 (Kyoto) ≈ ₹68,000",
+              visa: "Student Visa (CoE from KU), embassy application",
+              scholarships:
+                "MEXT, ADB-Japan Scholarship, Kyoto iUP Scholarship",
+              total: "¥1,975,800 ≈ ₹11.2 lakh",
+            },
+            "Tokyo Institute of Technology": {
+              name: "Tokyo Institute of Technology (Tokyo Tech)",
+              courses: "Computer Science, Engineering, Earth Sciences",
+              fees: "¥635,400 ≈ ₹3.6 lakh",
+              living: "¥140,000 (Tokyo) ≈ ₹79,000",
+              visa: "Student Visa (CoE)",
+              scholarships: "MEXT, JASSO Honors Scholarship (¥48k/mo)",
+              total: "¥2,415,400 ≈ ₹13.7 lakh",
+            },
+            "Osaka University": {
+              name: "Osaka University",
+              courses: "Material Science, Robotics, Dentistry, Business",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥100,000 (Osaka) ≈ ₹56,000",
+              visa: "Student Visa (CoE)",
+              scholarships: "MEXT, OU Scholarship, JICA programs",
+              total: "¥1,735,800 ≈ ₹9.8 lakh",
+            },
+            "Tohoku University": {
+              name: "Tohoku University",
+              courses: "Disaster Mgmt, Electrical Engineering, Medicine",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥90,000 (Sendai) ≈ ₹50,000",
+              visa: "Student Visa (CoE)",
+              scholarships: "MEXT, Tohoku University President Fellowship",
+              total: "¥1,615,800 ≈ ₹9.1 lakh",
+            },
+            "Waseda University": {
+              name: "Waseda University",
+              courses: "MBA, Intl Affairs, Computer Science, Media",
+              fees: "¥1,200,000 ≈ ₹6.8 lakh",
+              living: "¥130,000 (Tokyo) ≈ ₹74,000",
+              visa: "Student Visa (CoE; uni support)",
+              scholarships:
+                "Waseda partial waivers, JASSO, MEXT via recommendation",
+              total: "¥2,760,000 ≈ ₹15.7 lakh",
+            },
+            "Keio University": {
+              name: "Keio University",
+              courses: "Economics, Media Design, Sys Design Eng, Medicine",
+              fees: "¥1,330,000–2,000,000 ≈ ₹7.5–11.3 lakh",
+              living: "¥140,000 (Tokyo/Yokohama) ≈ ₹79,000",
+              visa: "Student Visa (CoE)",
+              scholarships:
+                "Keio Intl Scholarship (¥300k–600k), MEXT recommendations",
+              total: "¥2,930,000 ≈ ₹16.7 lakh",
+            },
+            "Hiroshima University": {
+              name: "Hiroshima University",
+              courses: "Peace Studies, Engineering, Biology, Education",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥80,000 (Hiroshima) ≈ ₹45,000",
+              visa: "Student Visa (CoE)",
+              scholarships: "MEXT, JASSO, HU President’s Award",
+              total: "¥1,495,800 ≈ ₹8.5 lakh",
+            },
+            "Nagoya University": {
+              name: "Nagoya University",
+              courses: "Automotive Engineering, Chemistry, Physics",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥95,000 (Nagoya) ≈ ₹53,000",
+              visa: "Student Visa (CoE)",
+              scholarships:
+                "MEXT, Toyota Foundation, Aichi Prefecture Scholarships",
+              total: "¥1,675,800 ≈ ₹9.5 lakh",
+            },
+            "Kyushu University": {
+              name: "Kyushu University",
+              courses: "Applied Chemistry, Aerospace Engineering, EA Studies",
+              fees: "¥535,800 ≈ ₹3 lakh",
+              living: "¥85,000 (Fukuoka) ≈ ₹47,000",
+              visa: "Student Visa (CoE)",
+              scholarships: "MEXT, Friendship Scholarship, JICA",
+              total: "¥1,555,800 ≈ ₹8.8 lakh",
+            },
+          },
+        },
+
+        Netherlands: {
+          overview:
+            "The Netherlands offers English-taught programs, MVV/VVR visas via TEV procedure, and numerous excellence scholarships like the Holland Scholarship.",
+          topUniversities: [
+            "Delft University of Technology",
+            "University of Twente",
+            "Eindhoven University of Technology",
+            "University of Amsterdam",
+            "Erasmus University Rotterdam",
+            "Leiden University",
+            "Tilburg University",
+            "University of Groningen",
+            "Radboud University Nijmegen",
+            "Vrije Universiteit Amsterdam",
+          ],
+          universityDetails: {
+            "Delft University of Technology": {
+              name: "Delft University of Technology (TU Delft)",
+              courses:
+                "Aerospace Engineering, Mechanical Engineering, Computer Science",
+              fees: "€18,750 (MSc) ≈ ₹16.9 lakh",
+              living: "€1,000 ≈ ₹90,000",
+              visa: "MVV + VVR (TEV procedure; proof €13,000+ funds + tuition paid)",
+              scholarships: "Justus & Louise van Effen, Holland Scholarship",
+              total: "€30,750 (fees + living) ≈ ₹27.7 lakh",
+            },
+            "University of Twente": {
+              name: "University of Twente",
+              courses:
+                "Electrical Engineering, Embedded Systems, Nanotechnology, Business",
+              fees: "€15,750 (MSc) ≈ ₹14.2 lakh",
+              living: "€900 ≈ ₹81,000",
+              visa: "MVV/VVR (proof €11k funds + tuition deposit refunded monthly)",
+              scholarships:
+                "UT Scholarship (€3k–€22k), Orange Tulip Scholarship",
+              total: "€26,550 ≈ ₹23.9 lakh",
+            },
+            "Eindhoven University of Technology": {
+              name: "Eindhoven University of Technology (TU/e)",
+              courses:
+                "Automotive Technology, Electrical Eng, Industrial Design, Data Science",
+              fees: "€16,000 (MSc) ≈ ₹14.4 lakh",
+              living: "€1,000 ≈ ₹90,000",
+              visa: "MVV/VVR (€11,000 deposit + tuition advance)",
+              scholarships: "ALS Scholarship, Holland Scholarship",
+              total: "€28,000 ≈ ₹25 lakh",
+            },
+            "University of Amsterdam": {
+              name: "University of Amsterdam (UvA)",
+              courses: "Data Science, AI, Economics, Intl Law",
+              fees: "€13,300–€17,500 ≈ ₹12–15.7 lakh",
+              living: "€1,100 ≈ ₹99,000",
+              visa: "MVV/VVR (transfer ~€12,000 to uni for visa)",
+              scholarships: "Amsterdam Merit, Excellence Scholarship",
+              total: "€26,700 ≈ ₹24 lakh",
+            },
+            "Erasmus University Rotterdam": {
+              name: "Erasmus University Rotterdam (EUR)",
+              courses: "MBA (RSM), Economics, Medicine, Dev Studies",
+              fees: "€17,000–€54,000 ≈ ₹15.3–48.6 lakh",
+              living: "€1,000 ≈ ₹90,000",
+              visa: "MVV/VVR (uni arranges via IND)",
+              scholarships:
+                "Erasmus Holland Scholarship, EUR India Scholarship",
+              total: "€29,000 ≈ ₹26 lakh",
+            },
+            "Leiden University": {
+              name: "Leiden University",
+              courses: "Intl Relations, Law, Psychology, CS",
+              fees: "€18,000–€19,300 ≈ ₹17.4 lakh",
+              living: "€1,000 ≈ ₹90,000",
+              visa: "MVV/VVR (proof funds ~€12k)",
+              scholarships: "Leiden Excellence (LexS), Orange Tulip",
+              total: "€31,300 ≈ ₹28.2 lakh",
+            },
+            "Tilburg University": {
+              name: "Tilburg University",
+              courses: "Data Science, Finance, Intl Business Law, Psychology",
+              fees: "€14,700 ≈ ₹13.3 lakh",
+              living: "€800 ≈ ₹72,000",
+              visa: "MVV/VVR (proof ~€10,000 + fees)",
+              scholarships:
+                "Partner Scholarship (25% tuition), Holland Scholarship",
+              total: "€24,300 ≈ ₹21.9 lakh",
+            },
+            "University of Groningen": {
+              name: "University of Groningen",
+              courses: "Energy Systems, Ecology, Astronomy, Business",
+              fees: "€15,000 ≈ ₹13.5 lakh",
+              living: "€900 ≈ ₹81,000",
+              visa: "MVV/VVR (standard proof of funds)",
+              scholarships:
+                "Eric Bleumink Fund, Holland Scholarship, OTS India",
+              total: "€25,800 ≈ ₹23.3 lakh",
+            },
+            "Radboud University Nijmegen": {
+              name: "Radboud University Nijmegen",
+              courses:
+                "Molecular Biology, Data Science, Theology, Neuroscience",
+              fees: "€16,000 ≈ ₹14.4 lakh",
+              living: "€850 ≈ ₹76,000",
+              visa: "MVV/VVR (one lump-sum proof for fees + living)",
+              scholarships: "Radboud Scholarship Programme, Orange Tulip",
+              total: "€26,200 ≈ ₹23.7 lakh",
+            },
+            "Vrije Universiteit Amsterdam": {
+              name: "Vrije Universiteit Amsterdam (VU)",
+              courses:
+                "Computer Science, Business Analytics, Neurosciences, Intl Business",
+              fees: "€15,000 ≈ ₹13.5 lakh",
+              living: "€1,100 ≈ ₹99,000",
+              visa: "MVV/VVR (university arranges)",
+              scholarships:
+                "VU Fellowship (50–100% tuition), Holland Scholarship",
+              total: "€28,200 ≈ ₹25.7 lakh",
+            },
+          },
+        },
+
+        Sweden: {
+          overview:
+            "Sweden provides non-EU tuition fees, proof of SEK 10,584/month living costs, and many university &amp; SI scholarships in tech and business fields.",
+          topUniversities: [
+            "KTH Royal Institute of Technology",
+            "Lund University",
+            "Chalmers University of Technology",
+            "Uppsala University",
+            "Stockholm University",
+            "Karolinska Institute",
+            "Linkoping University",
+            "University of Gothenburg",
+            "Umea University",
+            "Royal Institute of Art",
+          ],
+          universityDetails: {
+            "KTH Royal Institute of Technology": {
+              name: "KTH Royal Institute of Technology",
+              courses:
+                "Electrical Engineering, Machine Learning, Sustainable Energy, Embedded Systems",
+              fees: "SEK 310,000 (2-yr MSc) ≈ ₹24.8 lakh/yr",
+              living: "SEK 10,500 ≈ ₹84,000",
+              visa: "Sweden residence permit (pay tuition, show funds SEK ~127,000 for 12 mo)",
+              scholarships:
+                "KTH India Scholarship (tuition waiver + SEK 10k/mo), SI Scholarships",
+              total: "SEK 430,000 (tuition + living) ≈ ₹34 lakh",
+            },
+            "Lund University": {
+              name: "Lund University",
+              courses:
+                "Wireless Communications, Biotechnology, Intl Development, Management",
+              fees: "SEK 140,000 ≈ ₹11 lakh",
+              living: "SEK 9,500 ≈ ₹76,000",
+              visa: "Residence permit (show SEK ~10,300–10,584/mo funds)",
+              scholarships:
+                "Lund Global Scholarship (50–100% tuition), Erasmus Mundus, SI",
+              total: "SEK 254,000 ≈ ₹20 lakh",
+            },
+            "Chalmers University of Technology": {
+              name: "Chalmers University of Technology",
+              courses:
+                "Automotive Engineering, Sustainability, Computer Systems, Architecture",
+              fees: "SEK 160,000 ≈ ₹13 lakh",
+              living: "SEK 9,000 ≈ ₹72,000",
+              visa: "Residence permit (proof funds same as others)",
+              scholarships:
+                "IPOET Scholarship (75% waiver), Volvo Group Scholarship",
+              total: "SEK 268,000 ≈ ₹21.2 lakh",
+            },
+            "Uppsala University": {
+              name: "Uppsala University",
+              courses:
+                "Renewable Energy, Peace & Conflict Studies, Embedded Systems, Biology",
+              fees: "SEK 145,000 ≈ ₹11.6 lakh",
+              living: "SEK 8,500 ≈ ₹68,000",
+              visa: "Residence permit",
+              scholarships: "IPK Scholarship (tuition waiver), SI Scholarships",
+              total: "SEK 247,000 ≈ ₹19.6 lakh",
+            },
+            "Stockholm University": {
+              name: "Stockholm University",
+              courses:
+                "Computer Science, Banking & Finance, Env Studies, Global Health",
+              fees: "SEK 90,000–140,000 ≈ ₹7.2–11.6 lakh",
+              living: "SEK 10,000 ≈ ₹80,000",
+              visa: "Residence permit",
+              scholarships: "Uni Scholarship Scheme, SI Scholarship",
+              total: "SEK 220,000 ≈ ₹17.5 lakh",
+            },
+            "Karolinska Institute": {
+              name: "Karolinska Institute",
+              courses:
+                "Public Health, Health Informatics, Biomedicine, Global Health",
+              fees: "SEK 200,000 ≈ ₹16 lakh",
+              living: "SEK 10,000 ≈ ₹80,000",
+              visa: "Residence permit",
+              scholarships: "KI Global Master’s Scholarship, SI Scholarship",
+              total: "SEK 320,000 ≈ ₹25.5 lakh",
+            },
+            "Linkoping University": {
+              name: "Linkoping University",
+              courses: "Electronics Engineering, Ethnic Studies, AI & ML",
+              fees: "SEK 110,000 ≈ ₹8.8 lakh",
+              living: "SEK 8,000 ≈ ₹64,000",
+              visa: "Residence permit",
+              scholarships: "LiU Scholarship (25–50% tuition), SI Scholarship",
+              total: "SEK 206,000 ≈ ₹16.4 lakh",
+            },
+            "University of Gothenburg": {
+              name: "University of Gothenburg",
+              courses:
+                "Management, Fine Arts, European Studies, Marine Sciences",
+              fees: "SEK 130,000 ≈ ₹10.4 lakh",
+              living: "SEK 9,000 ≈ ₹72,000",
+              visa: "Residence permit",
+              scholarships: "GU Scholarship (tuition waiver), SI Scholarship",
+              total: "SEK 238,000 ≈ ₹19 lakh",
+            },
+            "Umea University": {
+              name: "Umea University",
+              courses: "Computing Science, Ecology, MBA, Photonics",
+              fees: "SEK 105,000 ≈ ₹8.4 lakh",
+              living: "SEK 8,000 ≈ ₹64,000",
+              visa: "Residence permit",
+              scholarships: "Umea Scholarship (full/partial), SI Scholarship",
+              total: "SEK 201,000 ≈ ₹16 lakh",
+            },
+            "Royal Institute of Art": {
+              name: "Royal Institute of Art / Royal College of Music",
+              courses: "Fine Arts (BFA/MFA), Music Performance",
+              fees: "SEK 200,000–270,000 ≈ ₹16–21.6 lakh",
+              living: "SEK 10,000 ≈ ₹80,000",
+              visa: "Residence permit",
+              scholarships: "Limited culture-specific, SI possible",
+              total: "SEK 390,000 ≈ ₹31 lakh",
+            },
+          },
+        },
+      };
+
+      // 1. Read the country the user selected (or default to US)
+      const country =
+        localStorage.getItem("selectedCountry") || "United States";
+
+      // 2. Dynamically swap out the header flag image
+      //    (expects e.g. images/flags/united_states.png — adjust naming as needed)
+      const headerEl = document.querySelector("header");
+      headerEl.style.backgroundImage = `linear-gradient(
+      135deg,
+      rgba(0, 123, 255, 0.9),
+      rgba(0, 123, 255, 0.5)
+    ),
+    url("images/flags/${country.toLowerCase().replace(/ /g, "_")}.png")`;
+
+      // 3. Now populate the header text and overview
+      document.getElementById("country-name").textContent = country;
+      document.getElementById("country-overview").textContent =
+        countries[country].overview;
+
+      // 4. Update the <h3> to show which country’s universities we’re listing
+      document.getElementById(
+        "top-univ-title"
+      ).textContent = `Top Universities in ${country}`;
+
+      // 5. Render the grid of university cards exactly as before
+      const grid = document.getElementById("top-univ-grid");
+      countries[country].topUniversities.forEach((u) => {
+        const col = document.createElement("div");
+        col.className = "col-md-6 col-lg-4";
+        const card = document.createElement("div");
+        card.className = "univ-card";
+        card.textContent = u;
+        card.onclick = () => {
+          const uni = countries[country].universityDetails[u];
+          if (!uni) return alert("Details coming soon for " + u);
+          document.getElementById("univName").textContent = uni.name;
+          document.getElementById("univCourses").textContent = uni.courses;
+          document.getElementById("univFees").textContent = uni.fees;
+          document.getElementById("univLiving").textContent = uni.living;
+          document.getElementById("univVisa").textContent = uni.visa;
+          document.getElementById("univScholarships").textContent =
+            uni.scholarships;
+          document.getElementById("univTotal").textContent = uni.total;
+          new bootstrap.Modal(
+            document.getElementById("univDetailModal")
+          ).show();
+        };
+        col.appendChild(card);
+        grid.appendChild(col);
+      });
+    </script>
+  </body>
+</html>

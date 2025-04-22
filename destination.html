@@ -1,0 +1,193 @@
+<!-- Study Destination Selection Page -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Destinations | GSAC</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .country-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .country-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">GSAC</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="student_details.html">Student Form</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="destination.html"
+                >Destinations</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard.html">Dashboard</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Study Destination Section -->
+    <div class="container mt-5">
+      <h2 class="text-center mb-4">Choose Your Study Destination</h2>
+      <div class="row g-4">
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('United States')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              United States
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('United Kingdom')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              United Kingdom
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Canada')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Canada
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Australia')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Australia
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Germany')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Germany
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('France')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              France
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Singapore')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Singapore
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Japan')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Japan
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Netherlands')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Netherlands
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 mx-auto">
+          <a
+            href="country_detail.html"
+            class="text-decoration-none"
+            onclick="saveCountry('Sweden')"
+          >
+            <div class="card country-card bg-light text-dark text-center">
+              Sweden
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p>&copy; 2025 Global Students Abroad Council. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      function saveCountry(country) {
+        localStorage.setItem("selectedCountry", country);
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

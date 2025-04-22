@@ -1,0 +1,101 @@
+/* Global Reset & Font */
+body {
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #202124;
+    margin: 0;
+    padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    font-weight: 500;
+    color: #202124;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    color: #1a73e8 !important;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+
+.navbar-nav .nav-link {
+    color: #5f6368 !important;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #1a73e8 !important;
+    border-bottom: 2px solid #1a73e8;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #1a73e8;
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1558b0;
+}
+
+.btn-outline-primary {
+    border-color: #1a73e8;
+    color: #1a73e8;
+}
+
+.btn-outline-primary:hover {
+    background-color: #e8f0fe;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    background-color: #fff;
+}
+
+.card h5 {
+    font-weight: 600;
+    color: #202124;
+}
+
+.card-body p {
+    color: #5f6368;
+}
+
+/* Footer */
+footer {
+    background-color: #f1f3f4;
+    color: #5f6368;
+    padding: 20px 0;
+    font-size: 0.95rem;
+    text-align: center;
+    border-top: 1px solid #dadce0;
+    margin-top: 40px;
+}
+
+/* Custom spacing */
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+/* Profile Image */
+img.rounded-circle {
+    border: 2px solid #dadce0;
+    padding: 3px;
+}
