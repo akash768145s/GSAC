@@ -59,6 +59,22 @@
       .country-card:hover .country-label {
         opacity: 1;
       }
+      @media (max-width: 576px) {
+        .country-card,
+        .country-card::before {
+          /* move the bg‐image 10px away from the right edge */
+          background-position-x: calc(100% - 10px);
+          background-position-y: center;
+        }
+      
+        /* optionally make the card a bit wider on mobile */
+        .country-card {
+          width: 70%;
+          height: 200px;
+          margin: 0 auto;
+        }
+      }
+      
     </style>
   </head>
   <body>
